@@ -8,3 +8,6 @@ const lightboxCaption=lightbox.querySelector('p');
 document.querySelectorAll('.artwork').forEach(button=>button.addEventListener('click',()=>{lightboxImage.src=button.dataset.src;lightboxImage.alt=button.querySelector('img').alt;lightboxCaption.textContent=button.dataset.caption;lightbox.showModal();}));
 lightbox.querySelector('.close').addEventListener('click',()=>lightbox.close());
 lightbox.addEventListener('click',event=>{if(event.target===lightbox)lightbox.close();});
+const copyEmailButton=document.querySelector('.copy-email');
+const copyStatus=document.querySelector('.copy-status');
+copyEmailButton.addEventListener('click',async()=>{const email=copyEmailButton.dataset.email;try{await navigator.clipboard.writeText(email);}catch(error){const field=document.createElement('textarea');field.value=email;field.setAttribute('readonly','');field.style.position='fixed';field.style.opacity='0';document.body.appendChild(field);field.select();document.execCommand('copy');field.remove();}copyStatus.textContent='Adresse copiée';setTimeout(()=>{copyStatus.textContent='';},2500);});
