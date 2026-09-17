@@ -1,0 +1,10 @@
+const menuButton=document.querySelector('.menu-toggle');
+const nav=document.querySelector('#navigation');
+menuButton.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuButton.setAttribute('aria-expanded',open);});
+nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{nav.classList.remove('open');menuButton.setAttribute('aria-expanded','false');}));
+const lightbox=document.querySelector('.lightbox');
+const lightboxImage=lightbox.querySelector('img');
+const lightboxCaption=lightbox.querySelector('p');
+document.querySelectorAll('.artwork').forEach(button=>button.addEventListener('click',()=>{lightboxImage.src=button.dataset.src;lightboxImage.alt=button.querySelector('img').alt;lightboxCaption.textContent=button.dataset.caption;lightbox.showModal();}));
+lightbox.querySelector('.close').addEventListener('click',()=>lightbox.close());
+lightbox.addEventListener('click',event=>{if(event.target===lightbox)lightbox.close();});
